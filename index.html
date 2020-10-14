@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RemindMe</title>
+    </head>
+    <body>
+        <article id="first-page">
+            <h1>Need a Reminder? Look no Further.</h1>
+            <form>
+                <p>Reminder Message</p>
+                    <textarea id="message"></textarea>
+            </form>
+            <p id="method-header">Reminder Method</p>
+            <form>
+                <label for="browser">Browser Notification</label>
+                    <input type="checkbox" id="browser">
+                <label for="email">E-Mail</label>
+                    <input type="checkbox" id="email" disabled>
+                <label for="sms">Text Message</label>
+                    <input type="checkbox" id="sms" disabled>
+                <label for="phone">Phone Call</label>
+                    <input type="checkbox" id="phone" disabled>
+                <label for="mail">Mail</label>
+                    <input type="checkbox" id="mail" disabled>
+            </form>
+            <p id="time">I want to be reminded in <input type="number" id="minutes"> minutes 
+                and <input type="number" id="seconds"> seconds.</p>
+            <button type="button">Set Reminder</button>
+        </article>
+    </body>
+</html>
