@@ -6,26 +6,87 @@
     <body>
         <article id="first-page">
             <h1>Need a Reminder? Look no Further.</h1>
-            <form>
-                <p>Reminder Message</p>
+            <form id="main-message">
+                <p id="message-title">Message</p>
                     <textarea id="message"></textarea>
             </form>
-            <p id="method-header">Reminder Method</p>
-            <form>
-                <label for="browser">Browser Notification</label>
-                    <input type="checkbox" id="browser">
-                <label for="email">E-Mail</label>
-                    <input type="checkbox" id="email" disabled>
-                <label for="sms">Text Message</label>
-                    <input type="checkbox" id="sms" disabled>
-                <label for="phone">Phone Call</label>
-                    <input type="checkbox" id="phone" disabled>
-                <label for="mail">Mail</label>
-                    <input type="checkbox" id="mail" disabled>
-            </form>
+            <section id="main-method">
+                <p id="method-header">Method</p>
+                <form id="method-check">
+                    <section id="whole-browser">
+                    <label for="browser">Browser Notification</label>
+                        <input type="checkbox" id="browser">
+                    </section>
+                    <section id="whole-email">
+                    <label for="email" class="disabled">E-Mail</label>
+                        <input type="checkbox" id="email" disabled>
+                    </section>
+                    <section id="whole-sms">
+                    <label for="sms" class="disabled">Text Message</label>
+                        <input type="checkbox" id="sms" disabled>
+                    </section>
+                    <section id="whole-phone">
+                    <label for="phone" class="disabled">Phone Call</label>
+                        <input type="checkbox" id="phone" disabled>
+                    </section>
+                    <section id="whole-mail">
+                    <label for="mail" class="disabled">Mail</label>
+                        <input type="checkbox" id="mail" disabled>
+                    </section>
+                </form>
+            </section>
             <p id="time">I want to be reminded in <input type="number" id="minutes"> minutes 
                 and <input type="number" id="seconds"> seconds.</p>
             <button type="button">Set Reminder</button>
         </article>
     </body>
 </html>
+<style>
+    body {
+        font-family: "Arial Black";
+        margin: 0;
+        color: white;
+    }
+
+    article {
+        min-height: 100vh;
+        overflow: auto;
+    }
+
+    #first-page {
+        text-align: center;
+        background-color:#45a3e5;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    
+    h1 {
+        font-size: 50px;
+    }
+
+    .disabled {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    #main-message {
+        display: flex;
+        justify-content: center;
+    }
+
+    #message-title {
+        padding-right: 50px;
+        font-size: 35px;
+    }
+    
+    #method-header {
+        font-size: 35px;
+    }
+
+    #method-check {
+        display: flex;
+        justify-content: space-around;
+    }
+
+
+</style>
