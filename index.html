@@ -35,9 +35,15 @@
                     </section>
                 </form>
             </section>
-            <p id="time">I want to be reminded in <input type="number" id="minutes" min="0"> minutes 
-                and <input type="number" id="seconds" min="0"> seconds.</p>
-            <button type="button">Set Reminder</button>
+            <p id="time">
+                I want to be reminded in 
+                <input type="number" id="minutes" min="0"> 
+                <span id="min-word">minutes</span>
+                and 
+                <input type="number" id="seconds" min="0"> 
+                <span id="sec-word">seconds.</span>
+            </p>
+            <button type="button" id="submit">Set Reminder</button>
         </article>
     </body>
 </html>
@@ -122,8 +128,53 @@
         align-self: center;
     }
 
-
 </style>
 <script>
+
+    const minutesInput = document.querySelector('#minutes')
+    const secondsInput = document.querySelector('#seconds')
+    const minWord = document.querySelector('#min-word')
+    const secWord = document.querySelector('#sec-word')
+    const reminderMessage = document.querySelector('#message')
+    const browserCheckbox = document.querySelector('#browser')
+    const submitButton = document.querySelector('#submit')
+
+    function validateMinutes() {
+        minutesValue = minutesInput.value
+        if (minutesValue === "1") {
+            return "minute"
+        } else {
+            return "minutes"
+        }
+    }
+
+    function validateSeconds() {
+        secondsValue = secondsInput.value
+        if (secondsValue === "1") {
+            return "second"
+        } else {
+            return "seconds"
+        }
+    }
+
+    function validateTime() {
+        minWord.innerHTML = validateMinutes()
+        secWord.innerHTML = validateSeconds()
+    }
+
+    function validateFields() {
+        minutesValue = minutesInput.value
+        secondsValue = secondsInput.value
+        messageValue = reminderMessage.value
+
+        if (minutesValue === "" || secondsValue === "" || messageValue === "" || browserCheckbox.checked === false) {
+            alert("You must fill out all fields")
+        }
+    }
+
+    minutesInput.addEventListener('input', validateTime)
+    secondsInput.addEventListener('input', validateTime)
+
+    submitButton.addEventListener('click', validateFields)
     
 </script>
