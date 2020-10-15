@@ -14,29 +14,29 @@
                 <p id="method-header">Method</p>
                 <form id="method-check">
                     <section id="whole-browser">
-                    <label for="browser">Browser Notification</label>
                         <input type="checkbox" id="browser">
+                        <label for="browser">Browser Notification</label>
                     </section>
                     <section id="whole-email">
-                    <label for="email" class="disabled">E-Mail</label>
                         <input type="checkbox" id="email" disabled>
+                        <label for="email" class="disabled">E-Mail</label>
                     </section>
                     <section id="whole-sms">
-                    <label for="sms" class="disabled">Text Message</label>
                         <input type="checkbox" id="sms" disabled>
+                        <label for="sms" class="disabled">Text Message</label>
                     </section>
                     <section id="whole-phone">
-                    <label for="phone" class="disabled">Phone Call</label>
                         <input type="checkbox" id="phone" disabled>
+                        <label for="phone" class="disabled">Phone Call</label>  
                     </section>
                     <section id="whole-mail">
-                    <label for="mail" class="disabled">Mail</label>
                         <input type="checkbox" id="mail" disabled>
+                        <label for="mail" class="disabled">Mail</label>
                     </section>
                 </form>
             </section>
-            <p id="time">I want to be reminded in <input type="number" id="minutes"> minutes 
-                and <input type="number" id="seconds"> seconds.</p>
+            <p id="time">I want to be reminded in <input type="number" id="minutes" min="0"> minutes 
+                and <input type="number" id="seconds" min="0"> seconds.</p>
             <button type="button">Set Reminder</button>
         </article>
     </body>
@@ -88,5 +88,42 @@
         justify-content: space-around;
     }
 
+    textarea {
+        width: 500px;
+        height: 100px;
+        resize: none;
+        font-size: 20px;
+    }
+
+    #time {
+        font-size: 25px;
+    }
+
+    input[type=number] {
+        background-color: #45a3e5;
+        border: none;
+        font-family: "Arial Black";
+        color: lightgreen;
+        font-size: 25px;
+        width: 60px;
+    }
+
+    button {
+        background-color: rgb(24, 24, 24);
+        color: white;
+        font-family: "Arial Black";
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        width: 250px;
+        height: 75px;
+        text-align: center;
+        font-size: 25px;
+        align-self: center;
+    }
+
 
 </style>
+<script>
+    
+</script>
