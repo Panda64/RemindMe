@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>RemindMe</title>
+        <link rel="stylesheet" href="odometer-theme-default.css" />
     </head>
     <body>
         <article id="first-page">
@@ -45,6 +46,17 @@
             </p>
             <button type="button" id="submit">Set Reminder</button>
         </article>
+        <article id="second-page">
+            <h1>Sample Text</h1>
+            <section id="countdown-main">
+                <p id="countdown-title">Time Left</p>
+                <p id="countdown">
+                    <span id="countdown-min" class="odometer">1</span>
+                    :
+                    <span id="countdown-sec" class="odometer">04</span>
+                </p> 
+            </section>
+        </article>
     </body>
 </html>
 <style>
@@ -56,7 +68,6 @@
 
     article {
         min-height: 100vh;
-        overflow: auto;
     }
 
     #first-page {
@@ -128,7 +139,30 @@
         align-self: center;
     }
 
+    #second-page {
+        background-color: lightgreen;
+        text-align: center;
+        display: flex;
+        overflow: hidden;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    #countdown {
+        font-size: 100px;
+        margin-top: -15px;
+    }
+
+    #countdown-main {
+        padding-top: 100px;
+    }
+
+    #countdown-title {
+        font-size: 35px;
+    }
+
 </style>
+<script src="odometer.js"></script>
 <script>
 
     const minutesInput = document.querySelector('#minutes')
@@ -138,7 +172,22 @@
     const reminderMessage = document.querySelector('#message')
     const browserCheckbox = document.querySelector('#browser')
     const submitButton = document.querySelector('#submit')
+    const secondPage = document.querySelector('#second-page')
+    const countdownMin = document.querySelector('#countdown-min')
+    const countdownSec = document.querySelector('#countdown-sec')
 
+    const reminderSuccess = ['Got it! Your Reminder is Set',
+                             'All Good to Go!',
+                             'Reminder is Locked and Loaded',
+                             'You Have Successfully Set Your Reminder!',
+                             'Mission Successful. You will be Reminded when the Timer is Up.',
+                             'Nice. Feel Free to Forget Now, I Will Remind You When the Time Comes.']
+
+    const time = {
+        minutes: minutesInput.value * 1,
+        seconds: secondsInput.value * 1
+    }
+    
     function validateMinutes() {
         minutesValue = minutesInput.value
         if (minutesValue === "1") {
@@ -169,6 +218,12 @@
 
         if (minutesValue === "" || secondsValue === "" || messageValue === "" || browserCheckbox.checked === false) {
             alert("You must fill out all fields")
+        } else {
+            secondPage.style.display = "flex"
+            SmoothVerticalScrolling(secondPage, 500, "top")
+            countdownMin.innerHTML = minutesValue
+            countdownSec.innerHTML = secondsValue
+            countdownHandler()
         }
     }
 
@@ -176,5 +231,59 @@
     secondsInput.addEventListener('input', validateTime)
 
     submitButton.addEventListener('click', validateFields)
+
+    function SmoothVerticalScrolling(e, time, where) {
+        var eTop = e.getBoundingClientRect().top;
+        var eAmt = eTop / 100;
+        var curTime = 0;
+        while (curTime <= time) {
+            window.setTimeout(SVS_B, curTime, eAmt, where);
+            curTime += time / 100;
+        }
+    }
+
+    function SVS_B(eAmt, where) {
+        if(where == "center" || where == "")
+            window.scrollBy(0, eAmt / 2);
+        if (where == "top")
+            window.scrollBy(0, eAmt);
+    }
     
+    function countdownHandler() {
+
+        var time = {
+            minutes: minutesInput.value * 1,
+            seconds: secondsInput.value * 1
+        };
+
+        var timer = setInterval(countdown, 1000)
+
+        function countdown() {
+            if (time.seconds > 0) {
+                time.seconds--
+            } 
+            else {
+                if (time.minutes > 0) {
+                    time.minutes--
+                    time.seconds = 60
+                }
+                else {
+                    time.minutes = 00
+                    time.seconds = 00
+                }
+            }
+
+            if (time.minutes >= 0 && time.seconds >= 10) {
+                countdownMin.innerHTML = time.minutes
+                countdownSec.innerHTML = time.seconds
+            } else if (time.minutes >= 0 && time.seconds >= 0) {
+                countdownMin.innerHTML = time.minutes
+                countdownSec.innerHTML = `0${time.seconds}`
+            }
+            else {
+                clearInterval(timer)
+            }
+        }
+    }
+
 </script>
