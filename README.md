@@ -14,7 +14,7 @@
 
  The second page is currently the place of the countdown.
 
- [Second Page Screenshot](/resources/Pics_&_GIFS/Second_Page.png)
+ ![Second Page Screenshot](/resources/Pics_&_GIFS/Second_Page.png)
 
  Once configuration on the first page is done and confirmation is given from the user on the first page, the site will then switch sections and begin the user specified countdown.
 
@@ -30,4 +30,4 @@
 
 
 The following Javascript and CSS library was used for the countdown transition effect:
-Odometer - [](https://github.hubspot.com/odometer/)
+Odometer - [Library](https://github.hubspot.com/odometer/)
