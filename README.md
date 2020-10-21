@@ -32,4 +32,4 @@
 The following Javascript and CSS library was used for the countdown transition effect:
 Odometer - [Library](https://github.hubspot.com/odometer/)
 
-That is currently the extent of this project. As it is not live at the moment, the only way to use this is through downloading it here.
+That is currently the extent of this project. To try it for yourself, click here - https://panda64.github.io/RemindMe/
