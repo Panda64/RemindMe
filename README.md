@@ -31,3 +31,5 @@
 
 The following Javascript and CSS library was used for the countdown transition effect:
 Odometer - [Library](https://github.hubspot.com/odometer/)
+
+That is currently the extent of this project. To try it for yourself, click here - https://panda64.github.io/RemindMe/
