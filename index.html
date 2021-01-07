@@ -16,27 +16,30 @@
                 <p id="method-header">Method</p>
                 <form id="method-check">
                     <section id="whole-browser">
-                        <input type="checkbox" id="browser" class="method">
+                        <input type="radio" id="browser" class="method" name="method-select">
                         <label for="browser">Browser Notification</label>
                     </section>
                     <section id="whole-email">
-                        <input type="checkbox" id="email" class="method" disabled>
-                        <label for="email" class="disabled">E-Mail</label>
+                        <input type="radio" id="email" class="method" name="method-select">
+                        <label for="email">E-Mail</label>
                     </section>
                     <section id="whole-sms">
-                        <input type="checkbox" id="sms" class="method" disabled>
-                        <label for="sms" class="disabled">Text Message</label>
+                        <input type="radio" id="sms" class="method" name="method-select">
+                        <label for="sms">Text Message</label>
                     </section>
                     <section id="whole-phone">
-                        <input type="checkbox" id="phone" class="method" disabled>
-                        <label for="phone" class="disabled">Phone Call</label>  
+                        <input type="radio" id="phone" class="method" name="method-select">
+                        <label for="phone">Phone Call</label>  
                     </section>
                     <section id="whole-mail">
-                        <input type="checkbox" id="mail" class="method" disabled>
+                        <input type="radio" id="mail" class="method" name="method-select" disabled>
                         <label for="mail" class="disabled">Mail</label>
                     </section>
                 </form>
             </section>
+            <button type="button" id="continue" class="reminder-button">Continue</button>
+        </article>
+        <article id="second-page">
             <p id="time">
                 I want to be reminded in 
                 <input type="number" id="minutes" min="0"> 
@@ -47,7 +50,7 @@
             </p>
             <button type="button" id="submit" class="reminder-button">Set Reminder</button>
         </article>
-        <article id="second-page">
+        <article id="third-page">
             <h1 id="reminder-phrase">Placeholder</h1>
             <section id="countdown-main">
                 <p id="countdown-title">Time Left</p>
@@ -58,7 +61,7 @@
                 </p> 
             </section>
         </article>
-        <article id="third-page">
+        <article id="fourth-page">
             <h1 id="times-up">Times up!</h1>
             <p id ="reminder-outro">This is your reminder to</p>
             <p id="user-message">Placeholder</p>

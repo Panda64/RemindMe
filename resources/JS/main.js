@@ -4,18 +4,23 @@ const secondsInput = document.querySelector('#seconds')
 const minWord = document.querySelector('#min-word')
 const secWord = document.querySelector('#sec-word')
 const reminderMessage = document.querySelector('#message')
-const browserCheckbox = document.querySelector('#browser')
+const browserRadio = document.querySelector('#browser')
+const emailRadio = document.querySelector('#email')
+const phoneRadio = document.querySelector('#phone')
+const smsRadio = document.querySelector('#sms')
+const continuteButton = document.querySelector('#continue')
 const submitButton = document.querySelector('#submit')
+const firstPage = document.querySelector('#first-page')
 const secondPage = document.querySelector('#second-page')
+const thirdPage = document.querySelector('#third-page')
+const fourthPage = document.querySelector('#fourth-page')
 const countdownMin = document.querySelector('#countdown-min')
 const countdownSec = document.querySelector('#countdown-sec')
 const countdownPhrase = document.querySelector('#reminder-phrase')
 const finalReminderMessage = document.querySelector('#user-message')
-const thirdPage = document.querySelector('#third-page')
 const alarmSound = document.querySelector('#alarm')
-const firstPage = document.querySelector('#first-page')
 const resetButton = document.querySelector('#reset')
-const allCheckboxes = document.querySelector('.method')
+const allRadios = document.querySelector('.method')
 
 const countdownPhrases = ['Got it! Your Reminder is Set.',
                          'All Good to Go!',
@@ -29,30 +34,52 @@ const time = {
     seconds: secondsInput.value * 1
 }
 
-// Determining whether or not the word "minutes" needs to be plural or singular based on the number inputted by the user
+// Determining and then displaying whether or not the word "minutes" needs to be plural or singular based on the number 
+// inputted by the user
 function validateMinutes() {
     minutesValue = minutesInput.value
     if (minutesValue === "1") {
-        return "minute"
+        minWord.innerHTML = "minute"
     } else {
-        return "minutes"
+        minWord.innerHTML = "minutes"
     }
 }
 
-// Determing whether or not the word "seconds" needs to be plural or singular based on the number inputted by the user
+// Determing and displaying whether or not the word "seconds" needs to be plural or singular based on the number 
+// inputted by the user
 function validateSeconds() {
     secondsValue = secondsInput.value
     if (secondsValue === "1") {
-        return "second"
+        secWord.innerHTML = "second."
     } else {
-        return "seconds"
+        secWord.innerHTML = "seconds."
     }
 }
 
-// Displaying the proper form of "minutes" and "seconds" on the screen
-function validateTime() {
-    minWord.innerHTML = validateMinutes()
-    secWord.innerHTML = validateSeconds()
+function validateFirstPage() {
+    messageValue = reminderMessage.value
+    radioChecked = true
+    nextPage = null
+
+    if (browserRadio.checked === true) {
+        nextPage = secondPage
+    } else if (emailRadio.checked === true) {
+        nextPage = fifthPage
+    } else if (phoneRadio.checked === true) {
+        nextPage = seventhPage
+    } else if (smsRadio.checked === true) {
+        nextPage = ninthPage
+    } else {
+        radioChecked = false
+    }
+
+    if (messageValue === "" || radioChecked === false) {
+        alert("You must fill out all fields")
+    } else {
+        showPages(nextPage)
+        SmoothVerticalScrolling(nextPage, 500, "top")
+        setTimeout(hidePages, 500, firstPage)
+    }
 }
 
 // Making sure that the user has filled out all fields before allowing them to click the "Set Reminder" button.
@@ -60,30 +87,30 @@ function validateTime() {
 // out all of the fields. If the user is successful in filling out all of the fields and then clicks the button, the page
 // will then transition to the next section: The page will autoscroll to the second section, removing the first section
 // from access in the process, whilst calling on a handful of other functions to get the countdown process started
-function validateFields() {
+function validateSecondPage() {
     minutesValue = minutesInput.value
     secondsValue = secondsInput.value
-    messageValue = reminderMessage.value
 
-    if (minutesValue === "" || secondsValue === "" || messageValue === "" || browserCheckbox.checked === false) {
+    if (minutesValue === "" || secondsValue === "") {
         alert("You must fill out all fields")
     } else {
-        secondPage.style.display = "flex"
-        SmoothVerticalScrolling(secondPage, 500, "top")
+        showPages(thirdPage)
+        SmoothVerticalScrolling(thirdPage, 500, "top")
         countdownMin.innerHTML = minutesValue
         countdownSec.innerHTML = secondsValue
         countdownHandler()
         randomCountdownPhrases()
-        setTimeout(hideFirstPage, 500)
+        setTimeout(hidePages, 500, secondPage)
     }
 }
 
 // Event listeners to run the "minutes" and "seconds" word validation whenver the user changes a timer input
-minutesInput.addEventListener('input', validateTime)
-secondsInput.addEventListener('input', validateTime)
+minutesInput.addEventListener('input', validateMinutes)
+secondsInput.addEventListener('input', validateSeconds)
 
 // Event listeners for when any of the two buttons throughout the site are clicked
-submitButton.addEventListener('click', validateFields)
+continuteButton.addEventListener('click', validateFirstPage)
+submitButton.addEventListener('click', validateSecondPage)
 resetButton.addEventListener('click', resetReminder)
 
 // Function that allows for the smooth scrolling from one section of a page to another even with Safari 
@@ -157,35 +184,30 @@ function randomCountdownPhrases() {
 // section (countdown section). This third section will alert the user the the time is up and finally relay the user's
 // intial reminder message back to them. 
 function timesUp() {
-    thirdPage.style.display = "flex"
+    showPages(fourthPage)
     finalReminderMessage.innerHTML = reminderMessage.value
-    SmoothVerticalScrolling(thirdPage, 500, "top")
-    setTimeout(hideSecondPage, 500)
+    SmoothVerticalScrolling(fourthPage, 500, "top")
+    setTimeout(hidePages, 500, thirdPage)
     alarmSound.play()
 }
 
-// These next four functions are for hiding their respective sections from view
-function hideFirstPage() {
-    firstPage.style.display = "none"
+// Hides the specified sections from view
+function hidePages(...args) {
+    for (var i = 0; i < args.length; i++) {
+        args[i].style.display = "none"
+    }
 }
 
-function hideSecondPage() {
-    secondPage.style.display = "none"
-}
-
-function hideThirdPage() {
-    thirdPage.style.display = "none"
-}
-
-function hideSecThirPages() {
-    secondPage.style.display = "none"
-    thirdPage.style.display = "none"
+function showPages(...args) {
+    for (var i = 0; i < args.length; i++) {
+        args[i].style.display = "flex"
+    }
 }
 
 // Clearing the input fields of the initial reminder setup
 function clearInputFields() {
     reminderMessage.value = ""
-    allCheckboxes.checked = false
+    allRadios.checked = false
     minutesInput.value = ""
     secondsInput.value = ""
 }
@@ -193,10 +215,8 @@ function clearInputFields() {
 // Scrolls back up to the first section with now empty fields for the user to setup a new reminder
 // This function is only called if the user clicks the button to setup another reminder
 function resetReminder() {
-    secondPage.style.display = "flex"
-    firstPage.style.display = "flex"
-
+    showPages(thirdPage, secondPage, firstPage)
     setTimeout(clearInputFields, 100)
-    setTimeout(SmoothVerticalScrolling, 0, firstPage, 500, "top")
-    setTimeout(hideSecThirPages, 500)
+    setTimeout(SmoothVerticalScrolling, 0, firstPage, 750, "top")
+    setTimeout(hidePages, 750, secondPage, thirdPage, fourthPage)
 }
