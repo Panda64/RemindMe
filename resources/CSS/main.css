@@ -1,0 +1,136 @@
+body {
+    font-family: "Arial Black";
+    margin: 0;
+    color: white;
+}
+
+article {
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#first-page {
+    text-align: center;
+    background-color:#45a3e5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+.disabled {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#main-message {
+    display: flex;
+    justify-content: center;
+}
+
+#message-title {
+    padding-right: 50px;
+    font-size: 35px;
+}
+
+#method-header {
+    font-size: 35px;
+}
+
+#method-check {
+    display: flex;
+    justify-content: space-around;
+}
+
+textarea {
+    width: 500px;
+    height: 100px;
+    resize: none;
+    font-size: 20px;
+}
+
+#time {
+    font-size: 25px;
+}
+
+input[type=number] {
+    background-color: #45a3e5;
+    border: none;
+    font-family: "Arial Black";
+    color: lightgreen;
+    font-size: 25px;
+    width: 60px;
+}
+
+.reminder-button {
+    background-color: rgb(24, 24, 24);
+    color: white;
+    font-family: "Arial Black";
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    width: 250px;
+    height: 75px;
+    text-align: center;
+    font-size: 25px;
+    align-self: center;
+}
+
+#second-page {
+    background-color: #66bf39;
+    text-align: center;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#countdown {
+    font-size: 100px;
+    margin-top: -15px;
+}
+
+#countdown-main {
+    padding-top: 100px;
+}
+
+#countdown-title {
+    font-size: 35px;
+}
+
+#third-page {
+    background-color: #ff3355;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#user-message {
+    font-family: "Rockwell Extra Bold";
+    font-size: 20px;
+    border: 2px solid black;
+    padding: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+#times-up {
+    font-size: 100px;
+}
+
+#reminder-outro {
+    font-size: 30px;
+}
+
+#reset {
+   position: absolute;
+   bottom: 0;
+   margin-bottom: 30px;
+}
+
+#reminder-phrase {
+    margin-left: 100px;
+    margin-right: 100px;
+}
