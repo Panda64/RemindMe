@@ -2,15 +2,18 @@
 <html>
     <head>
         <title>RemindMe</title>
-        <link rel="stylesheet" href="resources/CSS/odometer-theme-default.css" />
-        <link rel="stylesheet" href="resources/CSS/main.css" />
+        <link rel="stylesheet" href={{ url_for('static', filename='resources/CSS/main.css') }} />
+        <link rel="stylesheet" href={{ url_for('static', filename='resources/CSS/odometer-theme-default.css') }} />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
         <article id="first-page">
             <h1>Need a Reminder? Look no Further.</h1>
-            <form id="main-message">
-                <p id="message-title">Message</p>
-                    <textarea id="message"></textarea>
+            <form id="main-form" name="main-form">
+                <section id="main-message">
+                    <p id="message-title">Message</p>
+                    <textarea id="message" name="reminder-message"></textarea>
+                </section>
             </form>
             <section id="main-method">
                 <p id="method-header">Method</p>
@@ -37,9 +40,6 @@
                     </section>
                 </form>
             </section>
-            <button type="button" id="continue" class="reminder-button">Continue</button>
-        </article>
-        <article id="second-page">
             <p id="time">
                 I want to be reminded in 
                 <input type="number" id="minutes" min="0"> 
@@ -48,10 +48,10 @@
                 <input type="number" id="seconds" min="0"> 
                 <span id="sec-word">seconds.</span>
             </p>
-            <button type="button" id="submit" class="reminder-button">Set Reminder</button>
+            <button type="button" id="continue" class="reminder-button">Continue</button>
         </article>
-        <article id="third-page">
-            <h1 id="reminder-phrase">Placeholder</h1>
+        <article id="second-page">
+            <h1 id="browser-phrase">Placeholder</h1>
             <section id="countdown-main">
                 <p id="countdown-title">Time Left</p>
                 <p id="countdown">
@@ -61,7 +61,7 @@
                 </p> 
             </section>
         </article>
-        <article id="fourth-page">
+        <article id="third-page">
             <h1 id="times-up">Times up!</h1>
             <p id ="reminder-outro">This is your reminder to</p>
             <p id="user-message">Placeholder</p>
@@ -70,7 +70,20 @@
                 <source src="resources/Audio/alarm_sound.mp3" type="audio/mp3">
             </audio>
         </article>
+        <article id="fourth-page">
+            <section id="main-email">
+                <label for="email-input" id="email-label" form="main-form"> E-Mail Address</label>
+                <input type="email" id="email-input" name="email-input" form="main-form">
+            </section>
+            <button type="submit" id="submit-email" class="reminder-button" form="main-form">Set Reminder</button>
+        </article>
+        <article id="sixth-page">
+            <h1 id="other-phrase">Placeholder</h1>
+            <p class="tab-warning">WARNING: You must leave this tab open until you receive your reminder!
+                                   (This will be fixed in future updates)
+            </p>    
+        </article>
     </body>
 </html>
-<script src="resources/JS/odometer.js"></script>
-<script src="resources/JS/main.js"></script>
+<script src={{ url_for('static', filename='resources/JS/main.js') }}></script>
+<script src={{ url_for('static', filename='resources/JS/odometer.js') }}></script>
