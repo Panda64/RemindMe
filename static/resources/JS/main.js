@@ -10,6 +10,7 @@ const phoneRadio = document.querySelector('#phone')
 const smsRadio = document.querySelector('#sms')
 const continueButton = document.querySelector('#continue')
 const emailButton = document.querySelector('#submit-email')
+const mobileButton = document.querySelector('#submit-mobile')
 const firstPage = document.querySelector('#first-page')
 const secondPage = document.querySelector('#second-page')
 const thirdPage = document.querySelector('#third-page')
@@ -25,6 +26,7 @@ const alarmSound = document.querySelector('#alarm')
 const resetButton = document.querySelector('#reset')
 const allRadios = document.querySelector('.method')
 const emailInput = document.querySelector('#email-input')
+const mobileInput = document.querySelector('#mobile-input')
 
 const countdownPhrases = ['Got it! Your Reminder is Set.',
                          'All Good to Go!',
@@ -77,10 +79,8 @@ function validateFirstPage() {
         nextPage = secondPage
     } else if (emailRadio.checked === true) {
         nextPage = fourthPage
-    } else if (phoneRadio.checked === true) {
-        nextPage = sixthPage
-    } else if (smsRadio.checked === true) {
-        nextPage = eighthPage
+    } else if (phoneRadio.checked === true || smsRadio.checked === true) {
+        nextPage = fifthPage
     } else {
         radioChecked = false
     }
@@ -110,6 +110,17 @@ function validateEmail() {
     }
 }
 
+function validateMobile() {
+    mobileValue = mobileInput.value
+
+    if (mobileValue === "") {
+        alert("You must enter a valid phone number")
+    } else {
+        validClick(fifthPage, sixthPage)
+        randomCountdownPhrases(otherPhrase)
+    }
+}
+
 // Event listeners to run the "minutes" and "seconds" word validation whenver the user changes a timer input
 minutesInput.addEventListener('input', validateMinutes)
 secondsInput.addEventListener('input', validateSeconds)
@@ -117,6 +128,7 @@ secondsInput.addEventListener('input', validateSeconds)
 // Event listeners for when any of the two buttons throughout the site are clicked
 continueButton.addEventListener('click', validateFirstPage)
 emailButton.addEventListener('click', validateEmail)
+mobileButton.addEventListener('click', validateMobile)
 resetButton.addEventListener('click', resetReminder)
 
 // Function that allows for the smooth scrolling from one section of a page to another even with Safari 
@@ -235,6 +247,9 @@ $(document).ready(function () {
             data : {
                 user_reminder : $('#message').val(),
                 user_email : $('#email-input').val(),
+                user_mobile : $('#mobile-input').val(),
+                sms_radio : smsRadio.checked,
+                phone_radio : phoneRadio.checked,
             },
             type : 'POST',
             url : '/process'

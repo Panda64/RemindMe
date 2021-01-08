@@ -1,0 +1,3 @@
+<Response>
+    <Say voice="alice"> The following is your RemindMe reminder: {{ user_reminder }}</Say>
+</Response>

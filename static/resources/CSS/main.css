@@ -136,25 +136,25 @@ input[type=number] {
     margin-right: 100px;
 }
 
-#fourth-page {
+#fourth-page, #fifth-page {
     background-color: #f5a23d;
     display: none;
     flex-direction: column;
     justify-content: space-around;
 }
 
-#main-email {
+#main-email, #main-mobile {
     text-align: center;
     font-size: 50px;
 }
 
-#email-input {
+#email-input, #mobile-input {
     height: 40px;
     width: 400px;
     font-size: 30px;
 }
 
-#email-label {
+#email-label, #mobile-label {
     margin-right: 50px;
 }
 
