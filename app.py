@@ -8,7 +8,7 @@ from boto.s3.connection import S3Connection
 
 load_dotenv(dotenv_path="secrets.env")
 
-s3 = S3Connection(os.environ['SENDGRID_API_KEY'], os.environ['TWILIO_ACCOUNT_SID'], os.environ['TWILIO_AUTH_TOKEN'])
+s3 = S3Connection(os.environ.get['SENDGRID_API_KEY'], os.environ.get['TWILIO_ACCOUNT_SID'], os.environ.get['TWILIO_AUTH_TOKEN'])
 
 app = Flask(__name__)
 
