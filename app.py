@@ -33,8 +33,10 @@ def process():
     else:
         return '', 200
 
-@app.route('/voice')
-def voice(user_reminder):
+@app.route('/voice/<url_reminder>')
+def voice(url_reminder):
+    user_reminder = url_reminder.replace("+", " ")
+
     context = {
         'user_reminder': user_reminder
     }
@@ -72,14 +74,14 @@ def send_phone(user_reminder, user_mobile):
     account_sid = os.getenv('TWILIO_ACCOUNT_SID')
     auth_token = os.getenv('TWILIO_AUTH_TOKEN')
 
-    voice(user_reminder)
+    url_reminder = user_reminder.replace(" ", "+")
 
     client = Client(account_sid, auth_token)
 
     call = client.calls.create(
         to=f"+1{user_mobile}",
         from_="+13602338064",
-        url="https://jaylens-remindme.herokuapp.com/voice"
+        url=f"https://jaylens-remindme.herokuapp.com/voice/{url_reminder}"
     )
 
     print(call.sid)
