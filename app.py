@@ -39,7 +39,7 @@ def voice(user_reminder):
         'user_reminder': user_reminder
     }
 
-    render_template('phone.xml', **context)
+    return render_template('phone.xml', **context)
 
 def send_email(user_reminder, user_email):
     message = Mail(
