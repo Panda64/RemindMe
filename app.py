@@ -4,11 +4,8 @@ from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from twilio.rest import Client
-from boto.s3.connection import S3Connection
 
-load_dotenv(dotenv_path="secrets.env")
-
-s3 = S3Connection(os.environ.get['SENDGRID_API_KEY'], os.environ.get['TWILIO_ACCOUNT_SID'], os.environ.get['TWILIO_AUTH_TOKEN'])
+load_dotenv()
 
 app = Flask(__name__)
 
