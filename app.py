@@ -33,6 +33,14 @@ def process():
     else:
         return '', 200
 
+@app.route('/voice')
+def voice(user_reminder):
+    context = {
+        'user_reminder': user_reminder
+    }
+
+    render_template('phone.xml', **context)
+
 def send_email(user_reminder, user_email):
     message = Mail(
         from_email='frazergaming2015@gmail.com',
@@ -52,12 +60,6 @@ def send_sms(user_reminder, user_mobile):
     account_sid = os.getenv('TWILIO_ACCOUNT_SID')
     auth_token = os.getenv('TWILIO_AUTH_TOKEN')
 
-    context = {
-        'user_reminder': user_reminder
-    }
-
-    render_template('phone.xml', **context)
-
     client = Client(account_sid, auth_token)
 
     client.messages.create(
@@ -70,12 +72,14 @@ def send_phone(user_reminder, user_mobile):
     account_sid = os.getenv('TWILIO_ACCOUNT_SID')
     auth_token = os.getenv('TWILIO_AUTH_TOKEN')
 
+    voice(user_reminder)
+
     client = Client(account_sid, auth_token)
 
     call = client.calls.create(
         to=f"+1{user_mobile}",
         from_="+13602338064",
-        url="phone.xml"
+        url="https://jaylens-remindme.herokuapp.com/voice"
     )
 
     print(call.sid)
