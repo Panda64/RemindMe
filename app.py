@@ -33,7 +33,7 @@ def process():
     else:
         return '', 200
 
-@app.route('/voice/<url_reminder>')
+@app.route('/voice/<url_reminder>', methods=['POST'])
 def voice(url_reminder):
     user_reminder = url_reminder.replace("+", " ")
 
