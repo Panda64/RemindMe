@@ -5,7 +5,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from twilio.rest import Client
 
-load_dotenv()
+load_dotenv(dotenv_path="secrets.env")
 
 app = Flask(__name__)
 
