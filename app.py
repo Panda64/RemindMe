@@ -1,9 +1,12 @@
 import os
+import sched
+import time
 from flask import Flask, request, render_template, jsonify
 from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from twilio.rest import Client
+from datetime import datetime
 
 load_dotenv(dotenv_path="secrets.env")
 
@@ -21,17 +24,23 @@ def process():
     sms_radio = request.form['sms_radio']
     phone_radio = request.form['phone_radio']
 
+    s = sched.scheduler(time.time, time.sleep)
+
     if user_reminder and user_email:
         send_email(user_reminder, user_email)
         return '', 200
     elif user_reminder and user_mobile and sms_radio == "true":
-        send_sms(user_reminder, user_mobile)
-        return '', 200
+        s.enterabs(datetime(2021, 1, 10, 15, 7).timestamp(), 1, send_sms, argument=(user_reminder, user_mobile))
     elif user_reminder and user_mobile and phone_radio == "true":
-        send_phone(user_reminder, user_mobile)
-        return '', 200
+        s.enterabs(datetime(2021, 1, 10, 15, 9).timestamp(), 1, send_phone, argument=(user_reminder, user_mobile))
     else:
         return '', 200
+
+    print(s.queue)
+    
+    s.run()
+
+    return '', 200
 
 @app.route('/voice/<url_reminder>', methods=['POST'])
 def voice(url_reminder):

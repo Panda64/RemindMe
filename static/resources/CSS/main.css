@@ -52,16 +52,16 @@ textarea {
 }
 
 #time {
-    font-size: 25px;
+    font-size: 40px;
     text-align: center;
 }
 
 input[type=number] {
-    background-color: #45a3e5;
+    background-color: #f5a23d;
     border: none;
     font-family: "Arial Black";
     color: lightgreen;
-    font-size: 25px;
+    font-size: 40px;
     width: 60px;
 }
 
@@ -79,7 +79,7 @@ input[type=number] {
     align-self: center;
 }
 
-#second-page {
+#third-page {
     background-color: #66bf39;
     text-align: center;
     display: none;
@@ -100,7 +100,7 @@ input[type=number] {
     font-size: 35px;
 }
 
-#third-page {
+#fourth-page {
     background-color: #ff3355;
     display: none;
     flex-direction: column;
@@ -136,7 +136,7 @@ input[type=number] {
     margin-right: 100px;
 }
 
-#fourth-page, #fifth-page {
+#second-page, #fifth-page, #sixth-page {
     background-color: #f5a23d;
     display: none;
     flex-direction: column;
@@ -158,7 +158,7 @@ input[type=number] {
     margin-right: 50px;
 }
 
-#sixth-page {
+#seventh-page {
     background-color: #66bf39;
     display: none;
     flex-direction: column;

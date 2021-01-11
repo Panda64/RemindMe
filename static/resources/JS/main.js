@@ -9,6 +9,7 @@ const emailRadio = document.querySelector('#email')
 const phoneRadio = document.querySelector('#phone')
 const smsRadio = document.querySelector('#sms')
 const continueButton = document.querySelector('#continue')
+const browserButton = document.querySelector('#submit-browser')
 const emailButton = document.querySelector('#submit-email')
 const mobileButton = document.querySelector('#submit-mobile')
 const firstPage = document.querySelector('#first-page')
@@ -17,6 +18,7 @@ const thirdPage = document.querySelector('#third-page')
 const fourthPage = document.querySelector('#fourth-page')
 const fifthPage = document.querySelector('#fifth-page')
 const sixthPage = document.querySelector('#sixth-page')
+const seventhPage = document.querySelector('#seventh-page')
 const countdownMin = document.querySelector('#countdown-min')
 const countdownSec = document.querySelector('#countdown-sec')
 const browserPhrase = document.querySelector('#browser-phrase')
@@ -78,24 +80,29 @@ function validateFirstPage() {
     if (browserRadio.checked === true) {
         nextPage = secondPage
     } else if (emailRadio.checked === true) {
-        nextPage = fourthPage
-    } else if (phoneRadio.checked === true || smsRadio.checked === true) {
         nextPage = fifthPage
+    } else if (phoneRadio.checked === true || smsRadio.checked === true) {
+        nextPage = sixthPage
     } else {
         radioChecked = false
     }
 
-    if (messageValue === "" || radioChecked === false || minutesValue === "" || secondsValue === "") {
+    if (messageValue === "" || radioChecked === false) {
         alert("You must fill out all fields")
-    } else if (nextPage === secondPage) {
-        validClick(firstPage, secondPage)
+    } else {
+        validClick(firstPage, nextPage)
+    }
+}
+
+function validateSecondPage() {
+    if (minutesValue === "" || secondsValue === "") {
+        alert("You must fill out all fields")
+    } else {
+        validClick(secondPage, thirdPage)
         countdownMin.innerHTML = minutesValue
         countdownSec.innerHTML = secondsValue
         countdownHandler()
         randomCountdownPhrases(browserPhrase)
-       
-    } else {
-        validClick(firstPage, nextPage)
     }
 }
 
@@ -105,7 +112,7 @@ function validateEmail() {
     if (emailValue === "") {
         alert("You must enter a valid email address")
     } else {
-        validClick(fourthPage, sixthPage)
+        validClick(fifthPage, seventhPage)
         randomCountdownPhrases(otherPhrase)
     }
 }
@@ -116,7 +123,7 @@ function validateMobile() {
     if (mobileValue === "") {
         alert("You must enter a valid phone number")
     } else {
-        validClick(fifthPage, sixthPage)
+        validClick(sixthPage, seventhPage)
         randomCountdownPhrases(otherPhrase)
     }
 }
@@ -127,6 +134,7 @@ secondsInput.addEventListener('input', validateSeconds)
 
 // Event listeners for when any of the two buttons throughout the site are clicked
 continueButton.addEventListener('click', validateFirstPage)
+browserButton.addEventListener('click', validateSecondPage)
 emailButton.addEventListener('click', validateEmail)
 mobileButton.addEventListener('click', validateMobile)
 resetButton.addEventListener('click', resetReminder)
@@ -202,10 +210,10 @@ function randomCountdownPhrases(methodPhrase) {
 // section (countdown section). This third section will alert the user the the time is up and finally relay the user's
 // intial reminder message back to them. 
 function timesUp() {
-    showPages(thirdPage)
+    showPages(fourthPage)
     finalReminderMessage.innerHTML = reminderMessage.value
-    SmoothVerticalScrolling(thirdPage, 500, "top")
-    setTimeout(hidePages, 500, secondPage)
+    SmoothVerticalScrolling(fourthPage, 500, "top")
+    setTimeout(hidePages, 500, thirdPage)
     alarmSound.play()
 }
 
@@ -233,10 +241,10 @@ function clearInputFields() {
 // Scrolls back up to the first section with now empty fields for the user to setup a new reminder
 // This function is only called if the user clicks the button to setup another reminder
 function resetReminder() {
-    showPages(secondPage, firstPage)
+    showPages(thirdPage, secondPage, firstPage)
     setTimeout(clearInputFields, 100)
     setTimeout(SmoothVerticalScrolling, 0, firstPage, 750, "top")
-    setTimeout(hidePages, 750, secondPage, thirdPage)
+    setTimeout(hidePages, 750, secondPage, thirdPage, fourthPage)
 }
 
 $(document).ready(function () {
