@@ -23,21 +23,33 @@ def process():
     user_mobile = request.form['user_mobile']
     sms_radio = request.form['sms_radio']
     phone_radio = request.form['phone_radio']
+    email_date = request.form['email_date']
+    mobile_date = request.form['mobile_date']
 
     s = sched.scheduler(time.time, time.sleep)
 
     if user_reminder and user_email:
-        send_email(user_reminder, user_email)
-        return '', 200
+        formatted_date = convert_date(email_date)
+
+        s.enterabs(datetime(formatted_date[2], formatted_date[0], formatted_date[1], formatted_date[3], 
+        formatted_date[4]).timestamp(), 1, send_email, argument=(user_reminder, user_email))
+
     elif user_reminder and user_mobile and sms_radio == "true":
-        s.enterabs(datetime(2021, 1, 10, 15, 7).timestamp(), 1, send_sms, argument=(user_reminder, user_mobile))
+        formatted_date = convert_date(mobile_date)
+
+        s.enterabs(datetime(formatted_date[2], formatted_date[0], formatted_date[1], formatted_date[3], 
+        formatted_date[4]).timestamp(), 1, send_sms, argument=(user_reminder, user_mobile))
+
     elif user_reminder and user_mobile and phone_radio == "true":
-        s.enterabs(datetime(2021, 1, 10, 15, 9).timestamp(), 1, send_phone, argument=(user_reminder, user_mobile))
+        formatted_date = convert_date(mobile_date)
+        
+        s.enterabs(datetime(formatted_date[2], formatted_date[0], formatted_date[1], formatted_date[3], 
+        formatted_date[4]).timestamp(), 1, send_phone, argument=(user_reminder, user_mobile))
+
     else:
-        return '', 200
+        return 'Something went wrong. All needed information given by the user?', 200
 
     print(s.queue)
-    
     s.run()
 
     return '', 200
@@ -76,7 +88,7 @@ def send_sms(user_reminder, user_mobile):
     client.messages.create(
         to=f"+1{user_mobile}",
         from_="+13602338064",
-        body=f"The following is your RemindMe reminder: \n{user_reminder}"
+        body=f"The Following is Your RemindMe Reminder: \n{user_reminder}"
     )
 
 def send_phone(user_reminder, user_mobile):
@@ -94,6 +106,39 @@ def send_phone(user_reminder, user_mobile):
     )
 
     print(call.sid)
+
+def convert_date(date):
+    seperated_date = []
+    
+    def convert_month(month):
+        months = ["January", "February", "March", "April", "May", "June", 
+                  "July", "August", "September", "October", "November", "December"]
+        
+        converted_month = 0
+
+        for i in months:
+            if month == i:
+                converted_month = months.index(i) + 1
+                return converted_month
+
+    def format_date(date):
+        date = date.split()
+        date[0] = convert_month(date[0])
+        date = [int(i) for i in date]
+
+        return date
+
+    if "AM" in date:
+        stripped_date = date.replace(',', '').replace('@', '').replace(':', " ").replace(' AM', "")
+        seperated_date = format_date(stripped_date)
+    else:
+        stripped_date = date.replace(',', '').replace('@', '').replace(':', " ").replace(' PM', "")
+        seperated_date = format_date(stripped_date)
+        seperated_date[3] += 12
+
+    return seperated_date
+     
+
 
 if __name__ == '__main__':
     app.run(debug=True)

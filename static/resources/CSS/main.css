@@ -146,9 +146,11 @@ input[type=number] {
 #main-email, #main-mobile {
     text-align: center;
     font-size: 50px;
+    display: flex;
+    flex-direction: column;
 }
 
-#email-input, #mobile-input {
+#email-input, #mobile-input, #email-date, #mobile-date {
     height: 40px;
     width: 400px;
     font-size: 30px;
@@ -156,6 +158,11 @@ input[type=number] {
 
 #email-label, #mobile-label {
     margin-right: 50px;
+}
+
+#email-date-label, #mobile-date-label {
+    font-size: 40px;
+    margin-right: 25px;
 }
 
 #seventh-page {
@@ -168,4 +175,8 @@ input[type=number] {
 
 .tab-warning {
     color: #ff3232;
+}
+
+.email-mobile-component {
+    margin-top: 75px;
 }

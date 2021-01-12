@@ -30,6 +30,16 @@ const allRadios = document.querySelector('.method')
 const emailInput = document.querySelector('#email-input')
 const mobileInput = document.querySelector('#mobile-input')
 
+const datePicker = flatpickr(".date-select", {
+    animate: true,
+    enableTime: true,
+    dateFormat: "F j, Y @ h:i K",
+    plugins: [new confirmDatePlugin({
+        confirmText: "Ok",
+        theme: "dark"
+    })]
+})
+
 const countdownPhrases = ['Got it! Your Reminder is Set.',
                          'All Good to Go!',
                          'Reminder is Locked and Loaded!',
@@ -258,6 +268,8 @@ $(document).ready(function () {
                 user_mobile : $('#mobile-input').val(),
                 sms_radio : smsRadio.checked,
                 phone_radio : phoneRadio.checked,
+                email_date : $('#email-date').val(),
+                mobile_date : $('#mobile-date').val()
             },
             type : 'POST',
             url : '/process'
