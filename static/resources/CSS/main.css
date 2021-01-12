@@ -131,9 +131,10 @@ input[type=number] {
    margin-bottom: 30px;
 }
 
-#reminder-phrase {
+#browser-phrase, #other-phrase, #end-warning {
     margin-left: 100px;
     margin-right: 100px;
+    text-align: center;
 }
 
 #second-page, #fifth-page, #sixth-page {
@@ -170,13 +171,26 @@ input[type=number] {
     display: none;
     flex-direction: column;
     justify-content: space-around;
-    text-align: center;
-}
-
-.tab-warning {
-    color: #ff3232;
 }
 
 .email-mobile-component {
     margin-top: 75px;
+}
+
+.end-info {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#recap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#end-warning {
+    text-align: left;
+    width: 500px;
 }

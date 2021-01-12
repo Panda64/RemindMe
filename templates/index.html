@@ -75,7 +75,7 @@
             <p id="user-message">Placeholder</p>
             <a type="button" id="reset" class="reminder-button" href="#fourth-page">Set Another Reminder</a>
             <audio id="alarm">
-                <source src="resources/Audio/alarm_sound.mp3" type="audio/mp3">
+                <source src={{ url_for('static', filename='resources/Audio/alarm_sound.mp3') }} type="audio/mp3">
             </audio>
         </article>
         <article id="fifth-page">
@@ -106,9 +106,29 @@
         </article>
         <article id="seventh-page">
             <h1 id="other-phrase">Placeholder</h1>
-            <p class="tab-warning">WARNING: You must leave this tab open until you receive your reminder!
-                                   (This will be fixed in future updates)
-            </p>    
+            <section id="recap">
+                <section id="recap-info">
+                    <h2>Your Info:</h2>
+                    <section class="end-info">
+                        <h3>Reminder Type:&nbsp;</h2>
+                        <p id="info-1">Placeholder</p>
+                    </section>
+                    <section class="end-info">
+                        <h3 id="head-info-2">Placeholder:</h2>
+                        <p id="info-2">Placeholder</p>
+                    </section>
+                    <section class="end-info">
+                        <h3>Reminder Date:&nbsp;</h2>
+                        <p id="info-3">Placeholder</p>
+                    </section>
+                </section>
+                <section id="recap-warning">
+                    <h3 id="end-warning">Please ensure that all info you see here is correct or else you will not get your reminder!
+                        Feel free to close this window, or refresh to set another reminder.
+                    
+                    </h3>
+                </section>
+            </section>
         </article>
     </body>
 </html>

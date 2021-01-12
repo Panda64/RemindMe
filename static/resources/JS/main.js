@@ -29,6 +29,12 @@ const resetButton = document.querySelector('#reset')
 const allRadios = document.querySelector('.method')
 const emailInput = document.querySelector('#email-input')
 const mobileInput = document.querySelector('#mobile-input')
+const recapOne = document.querySelector('#info-1')
+const recapTwo = document.querySelector('#info-2')
+const recapThree = document.querySelector('#info-3')
+const headRecapTwo = document.querySelector('#head-info-2')
+const emailDate = document.querySelector('#email-date')
+const mobileDate = document.querySelector('#mobile-date')
 
 const datePicker = flatpickr(".date-select", {
     animate: true,
@@ -124,6 +130,7 @@ function validateEmail() {
     } else {
         validClick(fifthPage, seventhPage)
         randomCountdownPhrases(otherPhrase)
+        infoRecap
     }
 }
 
@@ -135,6 +142,7 @@ function validateMobile() {
     } else {
         validClick(sixthPage, seventhPage)
         randomCountdownPhrases(otherPhrase)
+        infoRecap()
     }
 }
 
@@ -256,6 +264,40 @@ function resetReminder() {
     setTimeout(SmoothVerticalScrolling, 0, firstPage, 750, "top")
     setTimeout(hidePages, 750, secondPage, thirdPage, fourthPage)
 }
+
+function infoRecap() {
+
+    function mobile() {
+        recapTwo.innerHTML = formatPhoneNumber(mobileInput.value)
+        headRecapTwo.innerHTML = "Phone Number:&nbsp;"
+        recapThree.innerHTML = mobileDate.value
+    }
+
+    if (emailRadio.checked === true) {
+        recapOne.innerHTML = "Email"
+        headRecapTwo.innerHTML = "Email Address:&nbsp;"
+        recapTwo.innerHTML = emailInput.value
+        recapThree.innerHTML = emailDate.value
+
+    } else if (smsRadio.checked === true) {
+        recapOne.innerHTML = "SMS (Text Message)"
+        mobile()
+
+    } else if (phoneRadio.checked === true) {
+        recapOne.innerHTML = "Phone Call"
+        mobile()
+        
+    }
+}
+
+function formatPhoneNumber(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+    if (match) {
+      return '(' + match[1] + ')-' + match[2] + '-' + match[3]
+    }
+    return null
+  }
 
 $(document).ready(function () {
     
