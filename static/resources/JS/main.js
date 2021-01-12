@@ -160,7 +160,7 @@ function validateEmail() {
     } else {
         validClick(fifthPage, seventhPage)
         randomCountdownPhrases(otherPhrase)
-        infoRecap
+        infoRecap()
     }
 }
 
