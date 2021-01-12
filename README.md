@@ -17,6 +17,7 @@
  
 
  The following Javascript and CSS libraries were used:
+ 
  Odometer (Browser notification countdown effect) - [Library](https://github.hubspot.com/odometer/)
  Flatpickr (Calendar interface for scheduling) - [Library](https://github.com/flatpickr/flatpickr)
 
