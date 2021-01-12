@@ -4,32 +4,22 @@
 
  What if you could set up a reminder in the form of an e-mail or text message sent right to your phone? Not enough? Maybe you would like an actual phone call, or even a physical peice of mail, to remind you of that special day that is around the corner. This is exactly what the RemindMe service hopes to achieve. 
 
- Right now, as a proof of concept, and until further development, browser notifications are the only way to get reminders through RemindMe. Yes, this does limit the viability of long term reminders at the moment, but know that that is the long term goal for the site.
+ The main page is where users set the reminder they want to recieve by entering their message, and the method to which they would like to recive the reminder. Right now, all methods except physical mail are functional.
 
- As of now, this is the current functionality:
+ After configuration on the first page, the user is then taken to their respective section based on which method they chose. For the browser notification, they are simply prompted to enter how long until they want their reminder (in minutes). The rest of the sections are similar, with the page prompting the user for the needed contact information, only this time the reminder is scheduled on a calendar interface, allowing for both short and long-term reminders.
 
- The main page is where users set the reminder they want to recieve by entering their message, the method to which they would like to recive the reminder, and the amount of time until they want to be reminded. Do note that in future iterations, the minute and second select will not be on the main page. Since the browser notification is on the only reminder method at the moment, it made sense to put configuration for it on the main page as well. This is bound to change as each method is planned to have their own section for configuration.
+ Here is what setting up a browser notification would look like:
+ ![Browser Notification Demo](static/resources/Pics_&_GIFS/RemindMeV2_Browser.gif)
 
- ![First Page Screenshot](static/resources/Pics_&_GIFS/First_Page.png)
+ Setting up an email, SMS, or phone call reminder are all similar to each other. Here is the email reminder setup as an example:
+ ![Email Reminder Demo](static/resources/Pics_&_GIFS/RemindMeV2_Email.gif)
 
- The second page is currently the place of the countdown.
+ 
 
- ![Second Page Screenshot](static/resources/Pics_&_GIFS/Second_Page.png)
+ The following Javascript and CSS libraries were used:
+ Odometer (Browser notification countdown effect) - [Library](https://github.hubspot.com/odometer/)
+ Flatpickr (Calendar interface for scheduling) - [Library](https://github.com/flatpickr/flatpickr)
 
- Once configuration on the first page is done and confirmation is given from the user on the first page, the site will then switch sections and begin the user specified countdown.
+ That is currently the extent of this project. I tried to keep it simple and intuitive. To try it for yourself, click here - https://jaylens-remindme.herokuapp.com (NOTE: The schedule feature does not currently work on deployment. This causes any reminder set to be sent instantly. This is being looked into and will be fixed shortly)
 
- ![First to Second Page GIF](static/resources/Pics_&_GIFS/RemindMeGif1.gif)
-
- The third, and currently final section of the site is where the user is notified of the timer being up, with their chosen reminder being presented to them at the middle of the screen. If the user wishes, they can click the "Set Another Reminder" button and do the entire process over again.
-
- ![Third Page Screenshot](static/resources/Pics_&_GIFS/Third_Page.png)
-
- The transition from the second to the third page is the same as the one before it, only this time happeneing when the time runs out. Note that the user only has access to one page at any time, preventing any forseeable confusion that may arise in relation to use.
-
- ![Second to Third Page GIF](static/resources/Pics_&_GIFS/RemindMeGif2.gif)
-
-
-The following Javascript and CSS library was used for the countdown transition effect:
-Odometer - [Library](https://github.hubspot.com/odometer/)
-
-That is currently the extent of this project. To try it for yourself, click here - https://panda64.github.io/RemindMe/
+ As there is no verification features yet, I ask that you please only use this service for setting reminders for yourself. Do not attempt to try and scam and/or harass anybody with this service. 
