@@ -16,10 +16,9 @@
 
  
 
- The following Javascript and CSS libraries were used:
- 
- Odometer (Browser notification countdown effect) - [Library](https://github.hubspot.com/odometer/)
- Flatpickr (Calendar interface for scheduling) - [Library](https://github.com/flatpickr/flatpickr)
+ The following Javascript and CSS libraries were used:  
+ Odometer (Browser notification countdown effect) - [Library](https://github.hubspot.com/odometer/)  
+ Flatpickr (Calendar interface for scheduling) - [Library](https://github.com/flatpickr/flatpickr)  
 
  That is currently the extent of this project. I tried to keep it simple and intuitive. To try it for yourself, click here - https://jaylens-remindme.herokuapp.com (NOTE: The schedule feature does not currently work on deployment. This causes any reminder set to be sent instantly. This is being looked into and will be fixed shortly)
 

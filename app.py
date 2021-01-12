@@ -12,6 +12,8 @@ load_dotenv(dotenv_path="secrets.env")
 
 app = Flask(__name__)
 
+s = sched.scheduler(time.time, time.sleep)
+
 # The main route that displays the single page site
 @app.route('/')
 def main():
@@ -28,8 +30,6 @@ def process():
     phone_radio = request.form['phone_radio']
     email_date = request.form['email_date']
     mobile_date = request.form['mobile_date']
-
-    s = sched.scheduler(time.time, time.sleep)
 
     if user_reminder and user_email:
         formatted_date = convert_date(email_date)
