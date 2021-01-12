@@ -12,10 +12,13 @@ load_dotenv(dotenv_path="secrets.env")
 
 app = Flask(__name__)
 
+# The main route that displays the single page site
 @app.route('/')
 def main():
     return render_template('index.html')
 
+# Where all of the data processing goes down. When the all of the form data (A completed reminder setup) is sent from 
+# the jQuery AJAX, this route will read the data and schedule the proper reminder 
 @app.route('/process', methods=['POST'])
 def process():
     user_reminder = request.form['user_reminder']
@@ -42,7 +45,7 @@ def process():
 
     elif user_reminder and user_mobile and phone_radio == "true":
         formatted_date = convert_date(mobile_date)
-        
+
         s.enterabs(datetime(formatted_date[2], formatted_date[0], formatted_date[1], formatted_date[3], 
         formatted_date[4]).timestamp(), 1, send_phone, argument=(user_reminder, user_mobile))
 
@@ -54,6 +57,9 @@ def process():
 
     return '', 200
 
+# To make the automated phone call capable of reading out the user reminder through TTS, it needs to grab the info from 
+# the web (It is how the Twilio API works). This is the route where the TwiML XML file is stored to provide the information.
+# The actual message info is passed through here by URL (see the "send_phone" function below)
 @app.route('/voice/<url_reminder>', methods=['POST'])
 def voice(url_reminder):
     user_reminder = url_reminder.replace("+", " ")
@@ -64,6 +70,8 @@ def voice(url_reminder):
 
     return render_template('phone.xml', **context)
 
+# Executes a call to SendGrid to send an email with the user-specified information. Both "send_sms" and "send_phone" functions
+# below work in a similar way to this.
 def send_email(user_reminder, user_email):
     message = Mail(
         from_email='frazergaming2015@gmail.com',
@@ -107,6 +115,8 @@ def send_phone(user_reminder, user_mobile):
 
     print(call.sid)
 
+# When the scheduled datetime comes in from the user, it is in a human-friendly format. This function turns that datetime
+# into the proper integer-only format that the scheduler function in "/process" can understand
 def convert_date(date):
     seperated_date = []
     
