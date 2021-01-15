@@ -31,28 +31,29 @@ def process():
     email_date = request.form['email_date']
     mobile_date = request.form['mobile_date']
 
-    if user_reminder and user_email:
-        formatted_date = convert_date(email_date)
+    if not user_reminder:
+        return 'Please add a reminder!', 200
 
-        s.enterabs(datetime(formatted_date[2], formatted_date[0], formatted_date[1], formatted_date[3], 
-        formatted_date[4]).timestamp(), 1, send_email, argument=(user_reminder, user_email))
+    elif user_email:
+        dt = convert_date(email_date)
+        contact = user_email
+        method = send_email
 
-    elif user_reminder and user_mobile and sms_radio == "true":
-        formatted_date = convert_date(mobile_date)
+    elif sms_radio:
+        dt = convert_date(mobile_date)
+        contact = user_mobile
+        method = send_sms 
 
-        s.enterabs(datetime(formatted_date[2], formatted_date[0], formatted_date[1], formatted_date[3], 
-        formatted_date[4]).timestamp(), 1, send_sms, argument=(user_reminder, user_mobile))
+    elif phone_radio:
+        dt = convert_date(mobile_date)
+        contact = user_mobile
+        method = send_phone
 
-    elif user_reminder and user_mobile and phone_radio == "true":
-        formatted_date = convert_date(mobile_date)
+    s.enterabs(datetime(dt[2], dt[0], dt[1], dt[3],  dt[4]).timestamp(), 
+        1, 
+        method, 
+        argument=(user_reminder, contact))
 
-        s.enterabs(datetime(formatted_date[2], formatted_date[0], formatted_date[1], formatted_date[3], 
-        formatted_date[4]).timestamp(), 1, send_phone, argument=(user_reminder, user_mobile))
-
-    else:
-        return 'Something went wrong. All needed information given by the user?', 200
-
-    print(s.queue)
     s.run()
 
     return '', 200
