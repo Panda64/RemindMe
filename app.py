@@ -14,15 +14,18 @@ app = Flask(__name__)
 
 s = sched.scheduler(time.time, time.sleep)
 
-# The main route that displays the single page site
 @app.route('/')
 def main():
+    """Main route that displays the single-paged site"""
+
     return render_template('index.html')
 
 # Where all of the data processing goes down. When the all of the form data (A completed reminder setup) is sent from 
 # the jQuery AJAX, this route will read the data and schedule the proper reminder 
 @app.route('/process', methods=['POST'])
 def process():
+    """Processes all user-inputted data from the main page"""
+
     user_reminder = request.form['user_reminder']
     user_email = request.form['user_email']
     user_mobile = request.form['user_mobile']
@@ -63,6 +66,8 @@ def process():
 # The actual message info is passed through here by URL (see the "send_phone" function below)
 @app.route('/voice/<url_reminder>', methods=['POST'])
 def voice(url_reminder):
+    """Creates the custom XML file for the Twilio API phone call"""
+    
     user_reminder = url_reminder.replace("+", " ")
 
     context = {
@@ -71,9 +76,9 @@ def voice(url_reminder):
 
     return render_template('phone.xml', **context)
 
-# Executes a call to SendGrid to send an email with the user-specified information. Both "send_sms" and "send_phone" functions
-# below work in a similar way to this.
 def send_email(user_reminder, user_email):
+    """Executes a call to SendGrid API to send an email with the user-specified information"""
+
     message = Mail(
         from_email='frazergaming2015@gmail.com',
         to_emails=user_email,
@@ -89,6 +94,8 @@ def send_email(user_reminder, user_email):
         print(e)
 
 def send_sms(user_reminder, user_mobile):
+    """Executes a call to Twilio API to send an SMS with the user-specified information"""
+
     account_sid = os.getenv('TWILIO_ACCOUNT_SID')
     auth_token = os.getenv('TWILIO_AUTH_TOKEN')
 
@@ -101,6 +108,8 @@ def send_sms(user_reminder, user_mobile):
     )
 
 def send_phone(user_reminder, user_mobile):
+    """Executes a call to Twilio API to send a phone call with the user-specified information"""
+
     account_sid = os.getenv('TWILIO_ACCOUNT_SID')
     auth_token = os.getenv('TWILIO_AUTH_TOKEN')
 
@@ -119,9 +128,13 @@ def send_phone(user_reminder, user_mobile):
 # When the scheduled datetime comes in from the user, it is in a human-friendly format. This function turns that datetime
 # into the proper integer-only format that the scheduler function in "/process" can understand
 def convert_date(date):
+    """Converts human-friendly datemine into an integer-only format for scheduler parsing"""
+
     seperated_date = []
     
     def convert_month(month):
+        """Converts month into integer format"""
+
         months = ["January", "February", "March", "April", "May", "June", 
                   "July", "August", "September", "October", "November", "December"]
         
@@ -133,6 +146,8 @@ def convert_date(date):
                 return converted_month
 
     def format_date(date):
+        """Helper function for convert_date() that formats the final integer-only date properly"""
+
         date = date.split()
         date[0] = convert_month(date[0])
         date = [int(i) for i in date]
@@ -149,7 +164,6 @@ def convert_date(date):
 
     return seperated_date
      
-
 
 if __name__ == '__main__':
     app.run(debug=True)
